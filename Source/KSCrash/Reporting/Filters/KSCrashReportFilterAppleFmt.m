@@ -487,7 +487,13 @@ static NSDictionary* g_registerOrders;
             NSString* name = [path lastPathComponent];
             NSString* uuid = [self toCompactUUID:[image objectForKey:@KSCrashField_UUID]];
             NSString* isBaseImage = (path && [executablePath isEqualToString:path]) ? @"+" : @" ";
-
+            
+            NSString* bundlePath = [[report valueForKey:@"system"] valueForKey:@"CFBundleExecutablePath"];
+            bundlePath = [[bundlePath stringByDeletingLastPathComponent] stringByDeletingLastPathComponent];
+            if (![path containsString:bundlePath]) {
+                continue;
+            }
+            
             [str appendFormat:FMT_PTR_RJ @" - " FMT_PTR_RJ @" %@%@ %@  <%@> %@\n",
              imageAddr,
              imageAddr + imageSize - 1,
@@ -840,7 +846,7 @@ static NSDictionary* g_registerOrders;
     [str appendString:[self threadListStringForReport:report mainExecutableName:executableName]];
     [str appendString:[self crashedThreadCPUStateStringForReport:report cpuArch:[self cpuArchForReport:report]]];
     [str appendString:[self binaryImagesStringForReport:report]];
-    [str appendString:[self extraInfoStringForReport:report mainExecutableName:executableName]];
+//    [str appendString:[self extraInfoStringForReport:report mainExecutableName:executableName]];
 
     return str;
 }
@@ -881,7 +887,7 @@ static NSDictionary* g_registerOrders;
     NSMutableString* str = [NSMutableString string];
 
     [str appendString:[self crashReportString:report]];
-    [str appendString:[self recrashReportString:report]];
+//    [str appendString:[self recrashReportString:report]];
 
     return str;
 }
