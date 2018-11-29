@@ -615,7 +615,7 @@
 		EDF2BEC11CCF15AD004BADF4 /* KSCrashFramework.h in Headers */ = {isa = PBXBuildFile; fileRef = 03DE7DA91C879A0200F789BA /* KSCrashFramework.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		EDF2BEC21CCF15AD004BADF4 /* KSCrash.h in Headers */ = {isa = PBXBuildFile; fileRef = CBF53D1B17EB765C0056DA83 /* KSCrash.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		EDF2BEC41CCF15AD004BADF4 /* KSCrashC.h in Headers */ = {isa = PBXBuildFile; fileRef = CBF53D1F17EB765C0056DA83 /* KSCrashC.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		EDF2BEC61CCF15AD004BADF4 /* KSCrashMonitor.h in Headers */ = {isa = PBXBuildFile; fileRef = CBF53D5C17EB765C0056DA83 /* KSCrashMonitor.h */; settings = {ATTRIBUTES = (Private, ); }; };
+		EDF2BEC61CCF15AD004BADF4 /* KSCrashMonitor.h in Headers */ = {isa = PBXBuildFile; fileRef = CBF53D5C17EB765C0056DA83 /* KSCrashMonitor.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		EDF2BEC71CCF15AD004BADF4 /* KSCrashMonitor_AppState.h in Headers */ = {isa = PBXBuildFile; fileRef = CBF53D5E17EB765C0056DA83 /* KSCrashMonitor_AppState.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		EDF2BEC81CCF15AD004BADF4 /* KSJSONCodecObjC.h in Headers */ = {isa = PBXBuildFile; fileRef = CBF53D6B17EB765C0056DA83 /* KSJSONCodecObjC.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		EDF2BEC91CCF15AD004BADF4 /* KSCrashMonitorType.h in Headers */ = {isa = PBXBuildFile; fileRef = CBF53D6017EB765C0056DA83 /* KSCrashMonitorType.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -677,7 +677,7 @@
 		EDF2BF071CCF15AD004BADF4 /* KSString.h in Headers */ = {isa = PBXBuildFile; fileRef = CBF53D8017EB765C0056DA83 /* KSString.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		EDF2BF081CCF15AD004BADF4 /* Optional.h in Headers */ = {isa = PBXBuildFile; fileRef = CBC43F0A1C5AF2B10083A11B /* Optional.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		EDF2BF0C1CCF15AD004BADF4 /* KSHTTPMultipartPostBody.h in Headers */ = {isa = PBXBuildFile; fileRef = CBF53D6517EB765C0056DA83 /* KSHTTPMultipartPostBody.h */; settings = {ATTRIBUTES = (Private, ); }; };
-		EDF2BF0D1CCF15AD004BADF4 /* KSCrashMonitor_System.h in Headers */ = {isa = PBXBuildFile; fileRef = CBF53D8317EB765C0056DA83 /* KSCrashMonitor_System.h */; settings = {ATTRIBUTES = (Private, ); }; };
+		EDF2BF0D1CCF15AD004BADF4 /* KSCrashMonitor_System.h in Headers */ = {isa = PBXBuildFile; fileRef = CBF53D8317EB765C0056DA83 /* KSCrashMonitor_System.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		EDF2BF0E1CCF15AD004BADF4 /* KSLogger.h in Headers */ = {isa = PBXBuildFile; fileRef = CBF53D6D17EB765C0056DA83 /* KSLogger.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		EDF2BF101CCF15AD004BADF4 /* LLVM.h in Headers */ = {isa = PBXBuildFile; fileRef = CBC43F191C5AF2B10083A11B /* LLVM.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		EDF2BF111CCF15AD004BADF4 /* KSCrashInstallation+Private.h in Headers */ = {isa = PBXBuildFile; fileRef = CBF53D2717EB765C0056DA83 /* KSCrashInstallation+Private.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -1745,10 +1745,10 @@
 				EDF2BEC21CCF15AD004BADF4 /* KSCrash.h in Headers */,
 				EDF2BEC41CCF15AD004BADF4 /* KSCrashC.h in Headers */,
 				CB5657F01E1D8A71005A8302 /* KSStackCursor_SelfThread.h in Headers */,
-				EDF2BEC61CCF15AD004BADF4 /* KSCrashMonitor.h in Headers */,
 				EDF2BEC71CCF15AD004BADF4 /* KSCrashMonitor_AppState.h in Headers */,
 				CB5633CE1DD5392A0023CEB6 /* KSCrashMonitorContext.h in Headers */,
 				EDF2BEC81CCF15AD004BADF4 /* KSJSONCodecObjC.h in Headers */,
+				EDF2BF0D1CCF15AD004BADF4 /* KSCrashMonitor_System.h in Headers */,
 				CB41F0661E0B9EBD00A1C9D7 /* KSStackCursor.h in Headers */,
 				CB41F06E1E0C4E9800A1C9D7 /* KSStackCursor_Backtrace.h in Headers */,
 				EDF2BEC91CCF15AD004BADF4 /* KSCrashMonitorType.h in Headers */,
@@ -1772,6 +1772,7 @@
 				EDF2BED91CCF15AD004BADF4 /* KSCrashReportFilterBasic.h in Headers */,
 				EDF2BEDA1CCF15AD004BADF4 /* KSCrashInstallationStandard.h in Headers */,
 				EDF2BEDB1CCF15AD004BADF4 /* KSCrashInstallationQuincyHockey.h in Headers */,
+				EDF2BEC61CCF15AD004BADF4 /* KSCrashMonitor.h in Headers */,
 				EDF2BEDC1CCF15AD004BADF4 /* KSCrashInstallationVictory.h in Headers */,
 				EDF2BEDD1CCF15AD004BADF4 /* KSCrashInstallation.h in Headers */,
 				CBA8A0CA1E2561210019B5B9 /* KSCrashCachedData.h in Headers */,
@@ -1823,7 +1824,6 @@
 				EDF2BF081CCF15AD004BADF4 /* Optional.h in Headers */,
 				CB69B8CA1DC03FFF002713B1 /* KSDate.h in Headers */,
 				EDF2BF0C1CCF15AD004BADF4 /* KSHTTPMultipartPostBody.h in Headers */,
-				EDF2BF0D1CCF15AD004BADF4 /* KSCrashMonitor_System.h in Headers */,
 				EDF2BF0E1CCF15AD004BADF4 /* KSLogger.h in Headers */,
 				CBB61CC61E0035E4000C24A6 /* KSID.h in Headers */,
 				EDF2BF101CCF15AD004BADF4 /* LLVM.h in Headers */,
@@ -1907,6 +1907,7 @@
 				EDF2BEBD1CCF15AD004BADF4 /* Frameworks */,
 				EDF2BEC01CCF15AD004BADF4 /* Headers */,
 				EDF2BF1D1CCF15AD004BADF4 /* Resources */,
+				3E19D47F21AEB445005C5A4A /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -1989,6 +1990,23 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		3E19D47F21AEB445005C5A4A /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\nset -e\nset +u\n# Avoid recursively calling this script.\nif [[ $SF_MASTER_SCRIPT_RUNNING ]]\nthen\nexit 0\nfi\nset -u\nexport SF_MASTER_SCRIPT_RUNNING=1\n\n# Sets the target folders and the final framework product.\n# 如果工程名称和Framework的Target名称不一样的话，要自定义FMKNAME\n# 例如: FMK_NAME = \"MyFramework\"\nFMK_NAME=\"KSCrash\"\n\n# Install dir will be the final output to the framework.\n# The following line create it in the root folder of the current project.\nINSTALL_DIR=${BUILD_DIR}/${CONFIGURATION}-universal\n\n# Working dir will not be deleted after the framework creation.\nWRK_DIR=\"${BUILD_DIR}\"\nDEVICE_DIR=${BUILD_DIR}/${CONFIGURATION}-iphoneos\nSIMULATOR_DIR=${BUILD_DIR}/${CONFIGURATION}-iphonesimulator\n\n# -configuration ${CONFIGURATION}\n# Clean and Building both architectures.\n\nxcodebuild -project \"${PROJECT_FILE_PATH}\" -target \"${TARGET_NAME}\" -configuration \"${CONFIGURATION}\" -sdk iphoneos BUILD_DIR=\"${BUILD_DIR}\" OBJROOT=\"${OBJROOT}\" BUILD_ROOT=\"${BUILD_ROOT}\" SYMROOT=\"${SYMROOT}\" ARCHS='armv7 arm64' VALID_ARCHS='armv7 arm64' clean build\n\nxcodebuild -project \"${PROJECT_FILE_PATH}\" -target \"${TARGET_NAME}\" -configuration \"${CONFIGURATION}\" -sdk iphonesimulator BUILD_DIR=\"${BUILD_DIR}\" OBJROOT=\"${OBJROOT}\" BUILD_ROOT=\"${BUILD_ROOT}\" SYMROOT=\"${SYMROOT}\" ARCHS='i386 x86_64' VALID_ARCHS='i386 x86_64' clean build\n\n# Cleaning the oldest.\nif [ -d \"${INSTALL_DIR}\" ]\nthen\nrm -rf \"${INSTALL_DIR}\"\nfi\n\nmkdir -p \"${INSTALL_DIR}\"\ncp -R ${DEVICE_DIR}/${FMK_NAME}.framework ${INSTALL_DIR}/${FMK_NAME}.framework\n# Uses the Lipo Tool to merge both binary files (i386 + armv6/armv7) into one Universal final product.\n\nlipo -create \"${DEVICE_DIR}/${FMK_NAME}.framework/${FMK_NAME}\" \"${SIMULATOR_DIR}/${FMK_NAME}.framework/${FMK_NAME}\" -output \"${INSTALL_DIR}/${FMK_NAME}.framework/${FMK_NAME}\"\n\n#rm -r \"${WRK_DIR}\"\n\nopen \"${INSTALL_DIR}\"\n\n";
+		};
 		3ECDBBA721AD34AA00401B50 /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;

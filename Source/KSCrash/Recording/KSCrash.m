@@ -421,6 +421,45 @@ static NSString* getBasePath()
                                 terminateProgram);
 }
 
+
+/*** create by Mr Yang  ***/
+
+/**
+ is has crash reports
+ 
+ @return is has reports
+ */
+- (BOOL) hasPendingCrashReporters
+{
+    return ([self reportCount] > 0);
+}
+
+/**
+ the last crash report while 'hasPendingCrashReporters' is true
+ 
+ @return the last crashReport
+ */
+- (NSDictionary *)lastCrashReport
+{
+    if ([self hasPendingCrashReporters]) {
+        return [self allReports].firstObject;
+    }
+    return nil;
+}
+
+
+/**
+ get all crash reports
+ 
+ @return all crashReports
+ */
+- (NSArray *)allCrashReports
+{
+    return [self allReports];
+}
+
+/*** ***/
+
 // ============================================================================
 #pragma mark - Advanced API -
 // ============================================================================

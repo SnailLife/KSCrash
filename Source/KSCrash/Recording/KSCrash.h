@@ -267,6 +267,29 @@ typedef enum
  */
 - (void) deleteReportWithID:(NSNumber*) reportID;
 
+/*** create by Mr Yang  ***/
+/**
+ is has crash reports
+
+ @return is has reports
+ */
+- (BOOL) hasPendingCrashReporters;
+
+/**
+ the last crash report while 'hasPendingCrashReporters' is true
+
+ @return the last crashReport
+ */
+- (NSDictionary *)lastCrashReport;
+
+/**
+ get all crash reports
+
+ @return all crashReports
+ */
+- (NSArray *)allCrashReports;
+/*** ***/
+
 /** Report a custom, user defined exception.
  * This can be useful when dealing with scripting languages.
  *
