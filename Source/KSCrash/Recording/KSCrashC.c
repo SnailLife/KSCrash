@@ -57,7 +57,7 @@
 
 /** True if KSCrash has been installed. */
 static volatile bool g_installed = 0;
-
+static volatile bool g_reportPath_set = 0;
 static bool g_shouldAddConsoleLogToReport = false;
 static bool g_shouldPrintPreviousLog = false;
 static char g_consoleLogPath[KSFU_MAX_PATH_LENGTH];
@@ -134,6 +134,9 @@ KSCrashMonitorType kscrash_install(const char* appName, const char* const instal
     }
     g_installed = 1;
 
+    if (g_reportPath_set) {
+        goto done;
+    }
     char path[KSFU_MAX_PATH_LENGTH];
     snprintf(path, sizeof(path), "%s/Reports", installPath);
     ksfu_makePath(path);
@@ -143,7 +146,9 @@ KSCrashMonitorType kscrash_install(const char* appName, const char* const instal
     ksfu_makePath(path);
     snprintf(path, sizeof(path), "%s/Data/CrashState.json", installPath);
     kscrashstate_initialize(path);
-
+    g_reportPath_set = 1;
+done:
+    
     snprintf(g_consoleLogPath, sizeof(g_consoleLogPath), "%s/Data/ConsoleLog.txt", installPath);
     if(g_shouldPrintPreviousLog)
     {
@@ -158,6 +163,23 @@ KSCrashMonitorType kscrash_install(const char* appName, const char* const instal
 
     KSLOG_DEBUG("Installation complete.");
     return monitors;
+}
+
+void ks_initializeCrashReportPath(const char * appName, const char* const installPath)
+{
+    if (g_reportPath_set) {
+        return;
+    }
+    char path[KSFU_MAX_PATH_LENGTH];
+    snprintf(path, sizeof(path), "%s/Reports", installPath);
+    ksfu_makePath(path);
+    kscrs_initialize(appName, path);
+    
+    snprintf(path, sizeof(path), "%s/Data", installPath);
+    ksfu_makePath(path);
+    snprintf(path, sizeof(path), "%s/Data/CrashState.json", installPath);
+    kscrashstate_initialize(path);
+    g_reportPath_set = 1;
 }
 
 KSCrashMonitorType kscrash_setMonitoring(KSCrashMonitorType monitors)

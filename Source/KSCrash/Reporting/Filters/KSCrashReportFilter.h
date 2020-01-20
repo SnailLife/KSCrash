@@ -52,6 +52,11 @@ typedef void(^KSCrashReportFilterCompletion)(NSArray* filteredReports, BOOL comp
 - (void) filterReports:(NSArray*) reports
           onCompletion:(KSCrashReportFilterCompletion) onCompletion;
 
+@optional
+/// 返回的是字典类型 (crash: , otherThread: )
+- (void)ct_filterReports:(NSArray *)reports
+            onCompletion:(KSCrashReportFilterCompletion)onCompletion;
+
 @end
 
 

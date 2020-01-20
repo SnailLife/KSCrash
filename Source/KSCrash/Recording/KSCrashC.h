@@ -52,6 +52,14 @@ extern "C" {
  */
 KSCrashMonitorType kscrash_install(const char* appName, const char* const installPath);
 
+    
+/**
+ 提前初始化reporter地址(在install前拿到崩溃地址)
+
+ @param appName appname
+ @param installPath installPath
+ */
+void ks_initializeCrashReportPath(const char * appName, const char* const installPath);
 /** Set the crash types that will be handled.
  * Some crash types may not be enabled depending on circumstances (e.g. running
  * in a debugger).

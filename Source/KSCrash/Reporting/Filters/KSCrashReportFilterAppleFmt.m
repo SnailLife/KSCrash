@@ -211,6 +211,26 @@ static NSDictionary* g_registerOrders;
     kscrash_callCompletion(onCompletion, filteredReports, YES, nil);
 }
 
+/// 返回的是字典类型 (crash: , otherThread: )
+- (void)ct_filterReports:(NSArray *)reports
+            onCompletion:(KSCrashReportFilterCompletion)onCompletion
+{
+    NSMutableArray* filteredReports = [NSMutableArray arrayWithCapacity:[reports count]];
+    for(NSDictionary* report in reports)
+    {
+        if([self majorVersion:report] == kExpectedMajorVersion)
+        {
+            id appleReport = [self ct_toAppleFormat:report];
+            if(appleReport != nil)
+            {
+                [filteredReports addObject:appleReport];
+            }
+        }
+    }
+    
+    kscrash_callCompletion(onCompletion, filteredReports, YES, nil);
+}
+
 - (NSString*) CPUType:(NSString*) CPUArch
 {
     if([CPUArch rangeOfString:@"arm64"].location == 0)
@@ -836,6 +856,64 @@ static NSDictionary* g_registerOrders;
     return str;
 }
 
+- (NSDictionary *) ct_mainAndCrashedthreadListStringForReport:(NSDictionary *)report
+                                       mainExecutableName:(NSString *)mainExecutableName
+{
+    // 主栈区以及崩溃栈区
+    __block NSMutableString* mainStr = [NSMutableString string];
+    // 其他栈区
+    __block NSMutableString* otherStr = [NSMutableString string];
+    NSDictionary* crash = [self crashReport:report];
+    
+    NSArray* threads = [crash objectForKey:@KSCrashField_Threads];
+    
+    [threads enumerateObjectsUsingBlock:^(NSDictionary  *_Nonnull thread, NSUInteger idx, BOOL * _Nonnull stop) {
+        BOOL crashed = [[thread objectForKey:@KSCrashField_Crashed] boolValue];
+        int index = [[thread objectForKey:@KSCrashField_Index] intValue];
+        NSString* name = [thread objectForKey:@KSCrashField_Name];
+        NSString* queueName = [thread objectForKey:@KSCrashField_DispatchQueue];
+        if (crashed || index ==0) { // 崩溃栈区或主线程
+            [mainStr appendString:[self appendThreadStr:index name:name queueName:queueName]];
+            if (crashed) {
+                [mainStr appendFormat:@"Thread %d Crashed:\n", index];
+            }
+            else{
+                [mainStr appendFormat:@"Thread %d:\n", index];
+            }
+            [mainStr appendString:
+             [self backtraceString:[thread objectForKey:@KSCrashField_Backtrace]
+                       reportStyle:self.reportStyle
+                mainExecutableName:mainExecutableName]];
+        }else{
+            [otherStr appendString:[self appendThreadStr:index name:name queueName:queueName]];
+            [otherStr appendFormat:@"Thread %d:\n", index];
+            [otherStr appendString:
+            [self backtraceString:[thread objectForKey:@KSCrashField_Backtrace]
+                       reportStyle:self.reportStyle
+                mainExecutableName:mainExecutableName]];
+        }
+    }];
+
+    return @{@"main":mainStr,@"other":otherStr};
+}
+
+- (NSString *)appendThreadStr:(int)index
+                         name:(NSString *)name
+                    queueName:(NSString *)queueName
+{
+    NSMutableString* str = [NSMutableString string];
+    if(name != nil)
+    {
+        [str appendFormat:@"Thread %d name:  %@\n", index, name];
+    }
+    else if(queueName != nil)
+    {
+        [str appendFormat:@"Thread %d name:  Dispatch queue: %@\n", index, queueName];
+    }
+    
+    return str;
+}
+
 - (NSString*) crashReportString:(NSDictionary*) report
 {
     NSMutableString* str = [NSMutableString string];
@@ -849,6 +927,23 @@ static NSDictionary* g_registerOrders;
 //    [str appendString:[self extraInfoStringForReport:report mainExecutableName:executableName]];
 
     return str;
+}
+/// 返回的是崩溃数据与其他线程数据分离的字典
+- (NSDictionary *)ct_crashReportString:(NSDictionary *)report
+{
+    NSMutableDictionary *dict = [NSMutableDictionary dictionary];
+    NSMutableString* str = [NSMutableString string];
+    NSString* executableName = [self mainExecutableNameForReport:report];
+    NSDictionary *threadDic = [self ct_mainAndCrashedthreadListStringForReport:report mainExecutableName:executableName];
+    [str appendString:[self headerStringForReport:report]];
+    [str appendString:[self errorInfoStringForReport:report]];
+    [str appendString:[threadDic objectForKey:@"main"]];
+    [str appendString:[self crashedThreadCPUStateStringForReport:report cpuArch:[self cpuArchForReport:report]]];
+    [str appendString:[self binaryImagesStringForReport:report]];
+    //    [str appendString:[self extraInfoStringForReport:report mainExecutableName:executableName]];
+    [dict setObject:str forKey:@"crash"];
+    [dict setObject:[threadDic objectForKey:@"other"] forKey:@"otherThread"];
+    return dict;
 }
 
 - (NSString*) recrashReportString:(NSDictionary*) report
@@ -890,6 +985,16 @@ static NSDictionary* g_registerOrders;
 //    [str appendString:[self recrashReportString:report]];
 
     return str;
+}
+
+- (NSDictionary *)ct_toAppleFormat:(NSDictionary *)report
+{
+    NSMutableDictionary* dict = [NSMutableDictionary dictionary];
+    
+    [dict setDictionary:[self ct_crashReportString:report]];
+    //    [str appendString:[self recrashReportString:report]];
+    
+    return dict;
 }
 
 @end

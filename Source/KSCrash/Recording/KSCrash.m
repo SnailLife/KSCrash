@@ -150,6 +150,8 @@ static NSString* getBasePath()
         self.maxReportCount = 5;
         self.searchQueueNames = NO;
         self.monitoring = KSCrashMonitorTypeProductionSafeMinimal;
+        // 初始化崩溃地址
+        ks_initializeCrashReportPath(self.bundleName.UTF8String, self.basePath.UTF8String);
     }
     return self;
 }

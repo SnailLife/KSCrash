@@ -175,8 +175,10 @@ catch(TYPE value)\
     }
     ksmc_resumeEnvironment();
 
-    KSLOG_DEBUG("Calling original terminate handler.");
-    g_originalTerminateHandler();
+    if (g_originalTerminateHandler != NULL) {
+        KSLOG_DEBUG("Calling original terminate handler.");
+        g_originalTerminateHandler();
+    }
 }
 
 
